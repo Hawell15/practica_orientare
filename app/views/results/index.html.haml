@@ -1,0 +1,21 @@
+%h1{ style: "text-align:center; color:green"} Results List
+
+%table{class: "table table-striped table-bordered table-hover"}
+  %thead
+    %tr{class: "table-primary"}
+      %th Place
+      %th Runner
+      %th Time
+      %th Category
+      %th Group
+      %th{ colspan: "3"}Actions
+  %tbody
+    - @results.each do |result|
+      %tr
+        %td= result.place
+        %td= result.runner.name + result.runner.surname
+        %td= result.time
+        %td= result.category.name
+        %td= result.group
+        = render partial: '/layouts/actions', :locals => { :element => result }
+= link_to 'New Result', new_result_path, class: "btn btn-info"

@@ -1,0 +1,17 @@
+%h1 Welcome to the orienteering database
+
+
+%table{ class: "table table-bordered" }
+  %thead
+    %tr{ class: "table-primary"}
+      %th{ scope: "col" }Runners
+      %th{ scope: "col" }Clubs
+      %th{ scope: "col" }Results
+      %th{ scope: "col" }Competitions
+  %tbody
+    %tr
+      %td= link_to "#{@runners_count}", runners_path
+      %td= link_to "#{@clubs_count}", clubs_path
+      %td= link_to "#{@results_count}", results_path
+      %td= link_to "#{@competitions_count}", competitions_path
+

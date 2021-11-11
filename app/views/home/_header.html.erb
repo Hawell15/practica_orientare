@@ -1,0 +1,29 @@
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom navbar navbar-light" style="background-color: #e3f2fd;">
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+<li> <%=link_to  image_tag("http://orienteering.md/wp-content/uploads/2021/05/logo_fos.png", class: "header-logo"), root_path, class: "logo nav-link" %></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Database
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%=link_to 'Clubs',        clubs_path,        class: "dropdown-item" %>
+                <%=link_to 'Runners',      runners_path,      class: "dropdown-item" %>
+                <%=link_to 'Competitions', competitions_path, class: "dropdown-item" %>
+                <%=link_to 'Groups',       groups_path,       class: "dropdown-item" %>
+                <%=link_to 'Results',      results_path,      class: "dropdown-item" %>
+                <%=link_to 'Categories',   categories_path,   class: "dropdown-item" %>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add to Database
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%=link_to 'Add Clubs',        new_club_path,         class: "dropdown-item" %>
+                <%=link_to 'Add Runners',      new_runner_path,       class: "dropdown-item" %>
+                <%=link_to 'Add Competitions', new_competition_path,  class: "dropdown-item" %>
+                <%=link_to 'Add Groups',       new_group_path,        class: "dropdown-item" %>
+                <%=link_to 'Add Results',      new_result_path,       class: "dropdown-item" %>
+            </div>
+        </li>
+</header>

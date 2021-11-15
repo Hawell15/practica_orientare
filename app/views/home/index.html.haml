@@ -10,8 +10,8 @@
       %th{ scope: "col" }Competitions
   %tbody
     %tr
-      %td= link_to "#{@runners_count}", runners_path
-      %td= link_to "#{@clubs_count}", clubs_path
-      %td= link_to "#{@results_count}", results_path
-      %td= link_to "#{@competitions_count}", competitions_path
+      %td= link_to @runners_count, runners_path
+      %td= link_to @clubs_count, clubs_path
+      %td= link_to @results_count, results_path
+      %td= link_to @competitions_count, competitions_path
 

@@ -1,0 +1,19 @@
+
+%table{class: "table table-striped table-bordered table-hover"}
+  %thead
+    %tr{class: "table-primary"}
+      %th Place
+      %th Runner
+      %th Time
+      %th Category
+      %th Group
+      %th{ colspan: "3"}Actions
+  %tbody
+    - results.each do |result|
+      %tr
+        %td= result.place
+        %td= link_to "#{result.runner.name} #{result.runner.surname}", runner_path(result.runner)
+        %td= Time.at(result.time).utc.strftime('%H:%M:%S')
+        %td= link_to result.category.name, category_path(result.category)
+        %td= link_to result.group.name, group_path(result.group)
+        = render partial: '/layouts/actions', :locals => { :element => result }

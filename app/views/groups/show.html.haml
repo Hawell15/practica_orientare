@@ -1,0 +1,17 @@
+.jumbotron
+  %h1{ class: "display-4"}= @group.name
+  %p
+    %strong= "Competition:"
+    #{@group.competition.name}
+  %p
+    %strong= "Date:"
+    #{@group.competition.date}
+  %hr{ class:"my-4" }
+  %p
+    %strong= "Class:"
+    #{@group.clasa}
+  %p
+    %strong= "Rang:"
+    #{@group.rang}
+= render partial: '/results/index', :locals => { :results => @group.results }
+= render partial: '/layouts/show_actions', :locals => { :element => @group }

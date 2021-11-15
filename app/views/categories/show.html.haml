@@ -1,0 +1,15 @@
+.jumbotron
+  %h1{ class: "display-4"}= @category.full_name
+  %p
+    %strong= "Name:"
+    #{@category.name}
+  %hr{ class:"my-4" }
+  %p
+    %strong= "Points:"
+    #{@category.points}
+= render partial: '/runners/index', :locals => { :runners => @category.runners }
+= render partial: '/layouts/show_actions', :locals => { :element => @category }
+
+
+
+

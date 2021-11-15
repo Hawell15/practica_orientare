@@ -1,0 +1,13 @@
+.jumbotron
+  %h1{ class: "display-4"}= "#{@runner.name} #{@runner.surname}"
+  %p
+    %strong= "Date of Birth:"
+    #{@runner.dob}
+  %p
+    %strong= "Category:"
+    #{@runner.category.full_name}
+  %p
+    %strong= "Club:"
+    = link_to "#{@runner.club.name}", club_path(@runner.club)
+= render partial: '/results/index', :locals => { :results => @runner.results }
+= render partial: '/layouts/show_actions', :locals => { :element => @runner }

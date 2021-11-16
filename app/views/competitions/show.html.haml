@@ -1,0 +1,27 @@
+.jumbotron
+  %h1{ class: "display-4"}= @competition.name
+  %p
+    %strong= "Date:"
+    #{@competition.date}
+  %p
+    %strong= "Location"
+    #{@competition.location}
+  %p
+    %strong= "Country"
+    #{@competition.country}
+  %p
+    %strong= "Distance Type"
+    #{@competition.distance_type}
+
+%nav
+  %div{ class: "nav nav-tabs", id: "nav-tab", role:"tablist"}
+    - @competition.groups.each_with_index do |group, index|
+      - div_class = index.zero? ? "active" : ""
+      = link_to group.name, "#nav-#{group.name.downcase}", class: "nav-item nav-link #{div_class}", id: "nav-#{group.name.downcase}-tab", role: "tab", "aria-controls" => "nav-#{group.name.downcase}", "data-toggle" => "tab"
+%div{ class:"tab-content", id: "nav-tabContent"}
+  -@competition.groups.each_with_index do |group, index|
+    - div_class = index.zero? ? "active show" : ""
+    %div{ class: "tab-pane fade #{div_class}", id: "nav-#{group.name.downcase}", role: "tabpanel", "aria-labelledby" => "nav-#{group.name.downcase}-tab" }
+      = render partial: 'results/index', :locals => { :results => group.results }
+= render partial: '/layouts/show_actions', :locals => { :element => @competition }
+

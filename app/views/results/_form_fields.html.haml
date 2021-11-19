@@ -1,0 +1,50 @@
+:javascript
+  function visibility() {
+    if ($("#runner_group_id option:selected").text() == "New") {
+      if ($('#runner_group_id option:checked').parent().attr('label') == "New") {
+        $("#create-competition").show()
+      } else {
+        $("#create-competition").hide()
+      };
+      $("#create-group").show();
+    } else {
+      $("#create-competition").hide()
+      $("#create-group").hide()
+    }
+  }
+
+.mb-3.row
+  = form.label :place, class: "col-sm-3 col-form-label"
+  .col-sm-1
+    = form.number_field :place, class: "form-control"
+.mb-3.row
+  = form.label :runner, class: "col-sm-3 col-form-label"
+  .col-sm-4
+    = form.select :runner_id, Runner.order(:name).map { |r| ["#{r.name} #{r.surname}", r.id] }, {}, class: "form-control"
+.mb-3.row
+  = form.label :time, class: "col-sm-3 col-form-label"
+  .col-sm-15
+    .row.g-3
+      .col-sm-2
+        = form.number_field :hours, class: "form-control", placeholder: "Hours"
+      .col-sm-2
+        = form.number_field :minutes, class: "form-control", placeholder: "Minutes"
+      .col-sm-2
+        = form.number_field :seconds, class: "form-control", placeholder: "Seconds"
+.mb-3.row
+  = form.label :category, class: "col-sm-3 col-form-label"
+  .col-sm-4
+    = form.select :category_id, Category.all.map { |c| [c.name, c.id] }, class: "form-control"
+.mb-3.row
+  = form.label :competition_and_group, class: "col-sm-3 col-form-label"
+  .col-sm-4
+    = form.grouped_collection_select :group_id, Competition.order(:date), :groups, :name, :id, :name, {},{:onchange => "visibility()", class: "form-control"}
+#create-competition
+  %h2 Add Competition Information
+  = render partial: '/competitions/form_fields', locals: { form: form , name: "competition_name"}
+#create-group
+  %h2 Add Group Information
+  .mb-3.row
+    = form.label :group_name, class: "col-sm-2 col-form-label"
+    .col-sm-3
+      = form.text_field :group_name, class: "form-control"

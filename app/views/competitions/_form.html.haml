@@ -1,0 +1,16 @@
+= form_with model: competition do |form|
+  -if competition.errors.any?
+    %div{ id: "error_explanation"}
+      %h2
+        = pluralize(competition.errors.count, "error")
+        prohibited this competition from being saved:
+
+      %ul
+        - competition.errors.each do |error|
+          %li
+          = error.full_message
+
+  = render 'form_fields', form: form, name: "name"
+  .actions
+    = form.submit class: "btn btn-success btn-sm"
+    = link_to 'Back', request.referer, class: "btn btn-secondary btn-sm"

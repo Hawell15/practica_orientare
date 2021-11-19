@@ -1,0 +1,127 @@
+:javascript
+  function result_visibility() {
+    if ($("#runner_category_id option:selected").text() == "Fara Categorie") {
+      $("#create-result").hide()
+    } else {
+      $("#create-result").show()
+    }
+  }
+
+  function visibility() {
+    if ($("#runner_group_id option:selected").text() == "New") {
+      if ($('#runner_group_id option:checked').parent().attr('label') == "New") {
+        $("#create-competition").show()
+      } else {
+        $("#create-competition").hide()
+      };
+      $("#create-group").show();
+    } else {
+      $("#create-competition").hide()
+      $("#create-group").hide()
+    }
+  }
+
+
+= form_with model: runner do |form|
+  -if runner.errors.any?
+    %div{ id: "error_explanation"}
+      %h2
+        = pluralize(runner.errors.count, "error")
+        prohibited this runner from being saved:
+
+      %ul
+        - runner.errors.each do |error|
+          %li
+          = error.full_message
+
+  .mb-3.row
+    = form.label :name, class: "col-sm-2 col-form-label"
+    .col-sm-3
+      = form.text_field :name, class: "form-control"
+  .mb-3.row
+    = form.label :surname, class: "col-sm-2 col-form-label"
+    .col-sm-3
+      = form.text_field :surname, class: "form-control"
+  .mb-3.row
+    = form.label :date, class: "col-sm-2 col-form-label"
+    .col-sm-3
+      = form.date_select :date, start_year: Date.today.year, end_year: Date.today.year - 90, class: "form-control"
+  .mb-3.row
+    = form.label :gender, class: "col-sm-2 col-form-label"
+    .col-sm-1
+      - array = ["M", "W"]
+      = form.select :gender, array, {}, class: "form-control"
+  .mb-3.row
+    = form.label :club, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.select :club_id, Club.order(:name).map { |c| [c.name, c.id] },{}, class: "form-control"
+  .mb-3.row
+    = form.label :category, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.select :category_id, Category.all.map { |c| [c.full_name, c.id] }, {}, onchange:"result_visibility();", class: "form-control"
+  #create-result{ style: "display: none;" }
+    %h2 Add Result Information
+    .mb-3.row
+      = form.label :place, class: "col-sm-3 col-form-label"
+      .col-sm-1
+        = form.number_field :place, class: "form-control"
+    .mb-3.row
+      = form.label :time, class: "col-sm-3 col-form-label"
+      .col-sm-15
+        .row.g-2
+          .col-sm-2
+            = form.number_field :hours, class: "form-control", placeholder: "Hours"
+          .col-sm-2
+            = form.number_field :minutes, class: "form-control", placeholder: "Minutes"
+          .col-sm-2
+            = form.number_field :seconds, class: "form-control", placeholder: "Seconds"
+    .mb-3.row
+      = form.label :category, class: "col-sm-3 col-form-label"
+      .col-sm-4
+        = form.select :category_id, Category.all.map { |c| [c.name, c.id] }, class: "form-control"
+    .mb-3.row
+      = form.label :competition_and_group, class: "col-sm-3 col-form-label"
+      .col-sm-4
+        = form.grouped_collection_select :group_id, Competition.order(:date), :groups, :name, :id, :name, {},{:onchange => "visibility()", class: "form-control"}
+    #create-competition
+      %h2 Add Competition Information
+      = render partial: '/competitions/form_fields', locals: { form: form , name: "competition_name"}
+    #create-group
+      %h2 Add Group Information
+      .mb-3.row
+        = form.label :group_name, class: "col-sm-2 col-form-label"
+        .col-sm-3
+          = form.text_field :group_name, class: "form-control"
+
+  %hr
+  .actions
+    = form.submit class: "btn btn-success btn-sm"
+    = link_to 'Back', request.referer, class: "btn btn-secondary btn-sm"
+
+
+
+
+-#   <div class="field">
+-#     <%= form.label :dob %>
+-#     <%= form.date_select :dob %>
+-#   </div>
+
+-#   <div class="field">
+-#     <%= form.label :category %>
+-#     <%= form.text_field :category %>
+-#   </div>
+
+-#   <div class="field">
+-#     <%= form.label :club %>
+-#     <%= form.text_field :club %>
+-#   </div>
+
+-#   <div class="field">
+-#     <%= form.label :gender %>
+-#     <%= form.text_field :gender %>
+-#   </div>
+
+-#   <div class="actions">
+-#     <%= form.submit %>
+-#   </div>
+-# <% end %>

@@ -1,0 +1,36 @@
+= form_with model: club do |form|
+  -if club.errors.any?
+    %div{ id: "error_explanation"}
+      %h2
+        = pluralize(club.errors.count, "error")
+        prohibited this club from being saved:
+
+      %ul
+        - club.errors.each do |error|
+          %li
+          = error.full_message
+
+  .mb-3.row
+    = form.label :name, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.text_field :name, class: "form-control"
+  .mb-3.row
+    = form.label :territory, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.text_field :territory, class: "form-control"
+  .mb-3.row
+    = form.label :representative, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.text_field :representative, class: "form-control"
+  .mb-3.row
+    = form.label :email, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.text_field :email, class: "form-control"
+  .mb-3.row
+    = form.label :phone, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.text_field :phone, class: "form-control"
+  %hr
+  .actions
+    = form.submit class: "btn btn-success btn-sm"
+    = link_to 'Back', request.referer, class: "btn btn-secondary btn-sm"

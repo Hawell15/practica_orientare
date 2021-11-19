@@ -25,6 +25,7 @@ class CompetitionsController < ApplicationController
 
     respond_to do |format|
       if @competition.save
+        Group.create({ name: "New", competition: @competition })
         format.html { redirect_to @competition, notice: "Competition was successfully created." }
         format.json { render :show, status: :created, location: @competition }
       else

@@ -1,0 +1,32 @@
+:javascript
+  function visibility() {
+    if ($("#group_competition_id option:selected").text() == "New") {
+      $("#create-competition").show()
+    } else {
+      $("#create-competition").hide()
+    }
+  }
+
+
+= form_with model: group do |form|
+  -if group.errors.any?
+    %div{ id: "error_explanation"}
+      %h2
+        = pluralize(group.errors.count, "error")
+        prohibited this group from being saved:
+
+      %ul
+        - group.errors.each do |error|
+          %li
+          = error.full_message
+
+  = render 'form_fields', form: form, name: "name"
+  #create-competition
+    %h2 Add Competition Information
+    = render partial: '/competitions/form_fields', locals: { form: form , name: "competition_name"}
+
+  %hr
+
+  .actions
+    = form.submit class: "btn btn-success btn-sm"
+    = link_to 'Back', request.referer, class: "btn btn-secondary btn-sm"

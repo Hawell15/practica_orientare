@@ -1,0 +1,20 @@
+.mb-3.row
+  = form.label name.to_sym, class: "col-sm-2 col-form-label"
+  .col-sm-4
+    = form.text_field name.to_sym, class: "form-control"
+.mb-3.row
+  = form.label :date, class: "col-sm-2 col-form-label"
+  .col-sm-4
+    = form.date_select :date, class: "form-control"
+.mb-3.row
+  = form.label :location, class: "col-sm-2 col-form-label"
+  .col-sm-4
+    = form.text_field :location, class: "form-control"
+.mb-3.row
+  = form.label :country, class: "col-sm-2 col-form-label"
+  .col-sm-4
+    = form.text_field :country, class: "form-control"
+.mb-3.row
+  = form.label :distance_type, class: "col-sm-2 col-form-label"
+  .col-sm-4
+    = form.text_field :distance_type, class: "form-control"

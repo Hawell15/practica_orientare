@@ -1,0 +1,29 @@
+= form_with model: category do |form|
+  -if category.errors.any?
+    %div{ id: "error_explanation"}
+      %h2
+        = pluralize(category.errors.count, "error")
+        prohibited this category from being saved:
+
+      %ul
+        - category.errors.each do |error|
+          %li
+          = error.full_message
+
+  .field.form-group
+    %label.form-control{:for => "category_name"} Name
+    %input#category_name.form-control{:name => "category[name]", :type => "text"}
+
+  .field.form-group
+    %label.form-control{:for => "category_full_name"} Full name
+    %input#category_full_name.form-control{:name => "category[full_name]", :type => "text"}
+
+  .field.form-group
+    %label.form-control{:for => "category_points"} Points
+    %input#category_full_name.form-control{:name => "category[points]", :type => "text"}
+
+  %hr
+
+  .actions
+    = form.submit class: "btn btn-success btn-sm"
+    = link_to 'Back', request.referer, class: "btn btn-secondary btn-sm"

@@ -1,7 +1,7 @@
 .mb-3.row
-  = form.label name.to_sym, class: "col-sm-2 col-form-label"
+  = form.label :name, class: "col-sm-2 col-form-label"
   .col-sm-3
-    = form.text_field name.to_sym, class: "form-control"
+    = form.text_field :group_name, class: "form-control"
 .mb-3.row
   = form.label :clasa, class: "col-sm-2 col-form-label"
   .col-sm-3
@@ -10,6 +10,6 @@
 .mb-3.row
   = form.label :competition, class: "col-sm-2 col-form-label"
   .col-sm-3
-    - array   = Competition.order(:date).map { |c| [c.name, c.id] }
+    - array   = Competition.order(:date).map { |c| [c.competition_name, c.id] }
     - default = array.detect {|a| a.first == "New"}
     = form.select :competition_id, array, {:selected => default}, onchange:"visibility();", class: "form-control"

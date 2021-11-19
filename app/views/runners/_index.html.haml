@@ -11,10 +11,10 @@
   %tbody
     - runners.each do |runner|
       %tr
-        %td= runner.name
+        %td= runner.runner_name
         %td= runner.surname
         %td= runner.dob
-        %td= runner.category.name
-        %td= link_to runner.club.name, club_path(runner.club)
+        %td= runner.category.category_name
+        %td= link_to runner.club.club_name, club_path(runner.club)
         %td= runner.gender
         = render partial: '/layouts/actions', :locals => { :element => runner }

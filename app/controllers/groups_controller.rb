@@ -64,6 +64,6 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:name, :clasa, :rang, :competition)
+      params.require(:group).permit(:group_name, :clasa, :rang, :competition)
     end
 end

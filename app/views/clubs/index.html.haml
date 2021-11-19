@@ -4,7 +4,7 @@
   %thead
     %tr{class: "table-primary"}
       %th Name
-      %th Teritory
+      %th Territory
       %th Representative
       %th Email
       %th Phone
@@ -12,8 +12,8 @@
   %tbody
     - @clubs.each do |club|
       %tr
-        %td= club.name
-        %td= club.teritory
+        %td= club.club_name
+        %td= club.territory
         %td= club.representative
         %td= club.email
         %td= club.phone

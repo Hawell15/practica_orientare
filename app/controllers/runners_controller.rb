@@ -64,6 +64,6 @@ class RunnersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def runner_params
-      params.require(:runner).permit(:name, :surname, :dob, :category, :club, :gender)
+      params.require(:runner).permit(:runner_name, :surname, :dob, :category, :club, :gender)
     end
 end

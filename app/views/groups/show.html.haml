@@ -1,8 +1,8 @@
 .jumbotron
-  %h1{ class: "display-4"}= @group.name
+  %h1{ class: "display-4"}= @group.group_name
   %p
     %strong= "Competition:"
-    #{@group.competition.name}
+    #{@group.competition.competition_name}
   %p
     %strong= "Date:"
     #{@group.competition.date}

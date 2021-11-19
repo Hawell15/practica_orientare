@@ -18,7 +18,7 @@ class ClubsTest < ApplicationSystemTestCase
     fill_in "Name", with: @club.name
     fill_in "Phone", with: @club.phone
     fill_in "Representative", with: @club.representative
-    fill_in "Teritory", with: @club.teritory
+    fill_in "Territory", with: @club.territory
     click_on "Create Club"
 
     assert_text "Club was successfully created"
@@ -33,7 +33,7 @@ class ClubsTest < ApplicationSystemTestCase
     fill_in "Name", with: @club.name
     fill_in "Phone", with: @club.phone
     fill_in "Representative", with: @club.representative
-    fill_in "Teritory", with: @club.teritory
+    fill_in "Territory", with: @club.territory
     click_on "Update Club"
 
     assert_text "Club was successfully updated"

@@ -23,7 +23,6 @@ class RunnersController < ApplicationController
   def create
     params = runner_params
     @runner = add_runner(params)
-    byebug
     unless params[:category_id].to_i == default_category.id
       params[:runner_id] = @runner.id
       params[:competition_id] = Group.find(params[:group_id]).competition_id

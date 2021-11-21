@@ -11,5 +11,9 @@
   = form.label :competition, class: "col-sm-2 col-form-label"
   .col-sm-3
     - array   = Competition.order(:date).map { |c| [c.competition_name, c.id] }
-    - default = array.detect {|a| a.first == "New"}
+    - default = @group.id ? [@group.competition.competition_name, @group.competition_id] : array.detect {|a| a.first == "New"}
     = form.select :competition_id, array, {:selected => default}, onchange:"visibility();", class: "form-control"
+:javascript
+  $(document).ready(function() {
+    visibility();
+  });

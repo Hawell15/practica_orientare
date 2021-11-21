@@ -4,6 +4,20 @@ class RunnersController < ApplicationController
   # GET /runners or /runners.json
   def index
     @runners = Runner.all
+    @runners.each do |runner|
+      category = get_category(runner)
+      runner.update(category: category) if runner.category != category
+    end
+
+    if params[:search]
+      @runners = Runner.where("runner_name LIKE '%#{params[:search]}%'")
+                       .or(Runner.where("surname LIKE '%#{params[:search]}%'"))
+    end
+     @runners = if params[:sort]&.include?('.')
+                 @runners.joins(params[:sort].split('.').first.singularize.to_sym).order(params[:sort])
+               else
+                 @runners.order(params[:sort])
+               end
   end
 
   # GET /runners/1 or /runners/1.json

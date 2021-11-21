@@ -1,3 +1,9 @@
 %h1{ style: "text-align:center; color:green"} Runners List
+%h4 Runner Search:
+= form_tag(runners_path, method: :get) do
+  = text_field_tag(:search, params[:search])
+  = submit_tag ("Search")
+%hr
+
 = render 'index', :runners => @runners
 = link_to 'New runner', new_runner_path, class: "btn btn-info"

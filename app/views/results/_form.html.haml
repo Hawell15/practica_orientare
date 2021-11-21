@@ -34,7 +34,7 @@
   .mb-3.row
     = form.label :runner, class: "col-sm-3 col-form-label"
     .col-sm-4
-      = form.select :runner_id, Runner.order(:name).map { |r| ["#{r.name} #{r.surname}", r.id] }, class: "form-control"
+      = form.select :runner_id, Runner.order(:runner_name).map { |r| ["#{r.runner_name} #{r.surname}", r.id] }, class: "form-control"
   .mb-3.row
     = form.label :time, class: "col-sm-3 col-form-label"
     .col-sm-15
@@ -48,14 +48,14 @@
   .mb-3.row
     = form.label :category, class: "col-sm-3 col-form-label"
     .col-sm-4
-      = form.select :category_id, Category.all.map { |c| [c.name, c.id] }, class: "form-control"
+      = form.select :category_id, Category.all.map { |c| [c.category_name, c.id] }, class: "form-control"
   .mb-3.row
     = form.label :competition_and_group, class: "col-sm-3 col-form-label"
     .col-sm-4
-      = form.grouped_collection_select :group_id, Competition.order(:date), :groups, :name, :id, :name, {},{:onchange => "visibility()", class: "form-control"}
+      = form.grouped_collection_select :group_id, Competition.order(:date), :groups, :competition_name, :id, :group_name, {},{:onchange => "visibility()", class: "form-control"}
   #create-competition{ style: "display: none;" }
     %h2 Add Competition Information
-    = render partial: '/competitions/form_fields', locals: { form: form , name: "competition_name"}
+    = render partial: '/competitions/form_fields', locals: { form: form }
   #create-group{ style: "display: none;" }
     %h2 Add Group Information
     .mb-3.row

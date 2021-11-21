@@ -10,18 +10,18 @@
           %li
           = error.full_message
 
-  .field.form-group
-    %label.form-control{:for => "category_name"} Name
-    %input#category_name.form-control{:name => "category[name]", :type => "text"}
-
-  .field.form-group
-    %label.form-control{:for => "category_full_name"} Full name
-    %input#category_full_name.form-control{:name => "category[full_name]", :type => "text"}
-
-  .field.form-group
-    %label.form-control{:for => "category_points"} Points
-    %input#category_full_name.form-control{:name => "category[points]", :type => "text"}
-
+  .mb-3.row
+    = form.label :name, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.text_field :category_name, class: "form-control"
+  .mb-3.row
+    = form.label :full_name, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.text_field :full_name, class: "form-control"
+  .mb-3.row
+    = form.label :points, class: "col-sm-2 col-form-label"
+    .col-sm-4
+      = form.text_field :points, class: "form-control"
   %hr
 
   .actions

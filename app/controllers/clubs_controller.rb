@@ -21,16 +21,11 @@ class ClubsController < ApplicationController
 
   # POST /clubs or /clubs.json
   def create
-    @club = Club.new(club_params)
+    @club = add_club(club_params)
 
     respond_to do |format|
-      if @club.save
-        format.html { redirect_to @club, notice: "Club was successfully created." }
-        format.json { render :show, status: :created, location: @club }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @club.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @club, notice: "Club was successfully created." }
+      format.json { render :show, status: :created, location: @club }
     end
   end
 
@@ -57,13 +52,13 @@ class ClubsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_club
-      @club = Club.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_club
+    @club = Club.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def club_params
-      params.require(:club).permit(:name, :teritory, :representative, :email, :phone)
-    end
+  # Only allow a list of trusted parameters through.
+  def club_params
+    params.require(:club).permit(:club_name, :territory, :representative, :email, :phone)
+  end
 end

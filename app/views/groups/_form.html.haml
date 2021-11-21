@@ -20,10 +20,10 @@
           %li
           = error.full_message
 
-  = render 'form_fields', form: form, name: "name"
+  = render 'form_fields', form: form
   #create-competition
     %h2 Add Competition Information
-    = render partial: '/competitions/form_fields', locals: { form: form , name: "competition_name"}
+    = render partial: '/competitions/form_fields', locals: { form: form }
 
   %hr
 

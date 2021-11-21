@@ -10,7 +10,7 @@
           %li
           = error.full_message
 
-  = render 'form_fields', form: form, name: "name"
+  = render 'form_fields', form: form
   .actions
     = form.submit class: "btn btn-success btn-sm"
     = link_to 'Back', request.referer, class: "btn btn-secondary btn-sm"

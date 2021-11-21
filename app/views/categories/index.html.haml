@@ -10,7 +10,7 @@
   %tbody
     - @categories.each do |category|
       %tr
-        %td= category.name
+        %td= category.category_name
         %td= category.full_name
         %td= category.points
         = render partial: '/layouts/actions', :locals => { :element => category }

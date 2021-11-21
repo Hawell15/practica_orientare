@@ -2,14 +2,14 @@
 
 one:
   name: MyString
-  teritory: MyString
+  territory: MyString
   representative: MyString
   email: MyString
   phone: MyString
 
 two:
   name: MyString
-  teritory: MyString
+  territory: MyString
   representative: MyString
   email: MyString
   phone: MyString

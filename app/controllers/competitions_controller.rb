@@ -21,11 +21,10 @@ class CompetitionsController < ApplicationController
 
   # POST /competitions or /competitions.json
   def create
-    @competition = Competition.new(competition_params)
+    @competition = add_competition(competition_params)
 
     respond_to do |format|
       if @competition.save
-        Group.create({ name: "New", competition: @competition })
         format.html { redirect_to @competition, notice: "Competition was successfully created." }
         format.json { render :show, status: :created, location: @competition }
       else
@@ -65,6 +64,6 @@ class CompetitionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def competition_params
-      params.require(:competition).permit(:name, :date, :location, :country, :distance_type)
+      params.require(:competition).permit(:group_name, :date, :location, :country, :distance_type)
     end
 end

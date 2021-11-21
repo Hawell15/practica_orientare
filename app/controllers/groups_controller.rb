@@ -21,16 +21,14 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
-    @group = Group.new(group_params)
+    params = group_params
+    params[:competition_id] = competition_id(params)
+
+    @group = add_group(params)
 
     respond_to do |format|
-      if @group.save
-        format.html { redirect_to @group, notice: "Group was successfully created." }
-        format.json { render :show, status: :created, location: @group }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @group, notice: "Group was successfully created." }
+      format.json { render :show, status: :created, location: @group }
     end
   end
 
@@ -64,6 +62,9 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:name, :clasa, :rang, :competition)
+      params.require(:group).permit(
+        :group_name, :clasa, :rang, :competition_id,
+        :competition_name, :date, :location, :country, :group_id, :distance_type
+      )
     end
 end

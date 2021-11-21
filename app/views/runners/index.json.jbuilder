@@ -1,1 +1,1 @@
-json.array! @runners, partial: "runners/runner", as: :runner
+json.array! @runners, partial: 'runners/runner', as: :runner

@@ -1,1 +1,1 @@
-json.array! @clubs, partial: "clubs/club", as: :club
+json.array! @clubs, partial: 'clubs/club', as: :club

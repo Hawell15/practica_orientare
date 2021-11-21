@@ -1,1 +1,1 @@
-json.partial! "runners/runner", runner: @runner
+json.partial! 'runners/runner', runner: @runner

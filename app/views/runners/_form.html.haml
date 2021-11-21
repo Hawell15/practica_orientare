@@ -62,6 +62,10 @@
   #create-result{ style: "display: none;" }
     %h2 Add Result Information
     .mb-3.row
+      = form.label :competition_and_group, class: "col-sm-3 col-form-label"
+      .col-sm-4
+        = form.grouped_collection_select :group_id, Competition.order(:date), :groups, :competition_name, :id, :group_name, {},{:onchange => "visibility()", class: "form-control"}
+    .mb-3.row
       = form.label :place, class: "col-sm-3 col-form-label"
       .col-sm-1
         = form.number_field :place, class: "form-control"
@@ -75,14 +79,6 @@
             = form.number_field :minutes, class: "form-control", placeholder: "Minutes"
           .col-sm-2
             = form.number_field :seconds, class: "form-control", placeholder: "Seconds"
-    .mb-3.row
-      = form.label :category, class: "col-sm-3 col-form-label"
-      .col-sm-4
-        = form.select :category_id, Category.all.map { |c| [c.category_name, c.id] }, class: "form-control"
-    .mb-3.row
-      = form.label :competition_and_group, class: "col-sm-3 col-form-label"
-      .col-sm-4
-        = form.grouped_collection_select :group_id, Competition.order(:date), :groups, :competition_name, :id, :group_name, {},{:onchange => "visibility()", class: "form-control"}
     #create-competition
       %h2 Add Competition Information
       = render partial: '/competitions/form_fields', locals: { form: form }

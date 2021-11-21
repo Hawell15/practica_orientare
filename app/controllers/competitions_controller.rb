@@ -21,11 +21,10 @@ class CompetitionsController < ApplicationController
 
   # POST /competitions or /competitions.json
   def create
-    @competition = Competition.new(competition_params)
+    @competition = add_competition(competition_params)
 
     respond_to do |format|
       if @competition.save
-        Group.create({ group_name: "New", competition: @competition })
         format.html { redirect_to @competition, notice: "Competition was successfully created." }
         format.json { render :show, status: :created, location: @competition }
       else

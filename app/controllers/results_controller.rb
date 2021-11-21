@@ -21,16 +21,16 @@ class ResultsController < ApplicationController
 
   # POST /results or /results.json
   def create
-    @result = Result.new(result_params)
+    params = result_params
+    params[:competition_id] = Group.find(params[:group_id]).competition_id
+    params[:competition_id] = competition_id(params)
+    params[:group_id] = group_id(params)
+    params[:time] = params[:hours].to_i * 3600 + params[:minutes].to_i * 60 + params[:seconds].to_i
+    @result = add_result(params)
 
     respond_to do |format|
-      if @result.save
-        format.html { redirect_to @result, notice: "Result was successfully created." }
-        format.json { render :show, status: :created, location: @result }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @result.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @result, notice: "Result was successfully created." }
+      format.json { render :show, status: :created, location: @result }
     end
   end
 
@@ -64,6 +64,9 @@ class ResultsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def result_params
-      params.require(:result).permit(:place, :runner, :time, :category, :group)
+      params.require(:result).permit(
+        :place, :runner_id, :hours, :minutes, :seconds, :category_id, :competition_id,
+        :competition_name, :date, :location, :country, :group_id, :distance_type, :group_name
+      )
     end
 end

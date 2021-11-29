@@ -1,6 +1,8 @@
 <h1>Editing Club</h1>
-
-<%= render 'form', club: @club %>
-
-<%= link_to 'Show', @club %> |
-<%= link_to 'Back', clubs_path %>
+<% if user_signed_in? %>
+  <%= render 'form', club: @club %>
+<% else %>
+  <p> You need to sign in to edit club </p>
+  <%=link_to 'Sign In', new_user_session_path, class: "btn btn-info btn-sm"%>
+  <%=link_to 'Sign Up', new_user_registration_path, class: "btn btn-success btn-sm" %>
+<% end %>

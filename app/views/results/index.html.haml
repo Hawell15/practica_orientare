@@ -1,3 +1,4 @@
 %h1{ style: "text-align:center; color:green"} Results List
 = render 'index', :results => @results
-= link_to 'New Result', new_result_path, class: "btn btn-info"
+- if user_signed_in?
+  = link_to 'New Result', new_result_path, class: "btn btn-info"

@@ -1,5 +1,6 @@
 %p{ class: "lead"}
-  = link_to 'Edit', edit_polymorphic_path(element), class: "btn btn-success btn-sm"
-  = link_to 'Delete', element, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"
+  - if user_signed_in?
+    = link_to 'Edit', edit_polymorphic_path(element), class: "btn btn-success btn-sm"
+    = link_to 'Delete', element, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"
   = link_to 'Back', request.referer, class: "btn btn-secondary btn-sm"
 

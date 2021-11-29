@@ -18,4 +18,5 @@
         %td= club.email
         %td= club.phone
         = render partial: '/layouts/actions', :locals => { :element => club }
-= link_to 'New Club', new_club_path, class: "btn btn-info"
+- if user_signed_in?
+  = link_to 'New Club', new_club_path, class: "btn btn-info"

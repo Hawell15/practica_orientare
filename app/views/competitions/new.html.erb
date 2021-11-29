@@ -1,3 +1,9 @@
 <h1>New Competition</h1>
+<% if user_signed_in? %>
+  <%= render 'form', competition: @competition %>
+<% else %>
+  <p> You need to sign in to add new competition </p>
+  <%=link_to 'Sign In', new_user_session_path, class: "btn btn-info btn-sm"%>
+  <%=link_to 'Sign Up', new_user_registration_path, class: "btn btn-success btn-sm" %>
+<% end %>
 
-<%= render 'form', competition: @competition %>

@@ -1,0 +1,5 @@
+<%= form_tag competition_file_path, multipart: true  do %>
+<label for="id">File Path</label>
+<%= file_field_tag :path %>
+<%= submit_tag "Submit" %>
+<% end %>

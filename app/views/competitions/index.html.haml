@@ -18,5 +18,6 @@
         %td= competition.country
         %td= competition.distance_type
         = render partial: '/layouts/actions', :locals => { :element => competition }
-= link_to 'New Competition', new_competition_path, class: "btn btn-info"
+- if user_signed_in?
+  = link_to 'New Competition', new_competition_path, class: "btn btn-info"
 

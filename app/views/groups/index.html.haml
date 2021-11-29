@@ -16,4 +16,5 @@
         %td= group.rang
         %td= link_to group.competition.competition_name, competition_path(group.competition)
         = render partial: '/layouts/actions', :locals => { :element => group }
-= link_to 'New Group', new_group_path, class: "btn btn-info"
+- if user_signed_in?
+  = link_to 'New Group', new_group_path, class: "btn btn-info"

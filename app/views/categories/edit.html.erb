@@ -1,3 +1,8 @@
 <h1>Editing Category</h1>
-
-<%= render 'form', category: @category %>
+<% if user_signed_in? %>
+  <%= render 'form', category: @category %>
+<% else %>
+  <p> You need to sign in to edit category </p>
+  <%=link_to 'Sign In', new_user_session_path, class: "btn btn-info btn-sm"%>
+  <%=link_to 'Sign Up', new_user_registration_path, class: "btn btn-success btn-sm" %>
+<% end %>

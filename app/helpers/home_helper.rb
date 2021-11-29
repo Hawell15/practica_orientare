@@ -26,7 +26,6 @@ module HomeHelper
         group_name:           group['name'],
         competition_id: comp_id
       }.compact
-
       group_id = add_group(group_hash).id
 
       json['persons'].select { |pers| pers['group_id'] == group['id'] }.each do |runner|

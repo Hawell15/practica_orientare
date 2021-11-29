@@ -1,12 +1,12 @@
 %table{class: "table table-striped table-bordered table-hover"}
   %thead
     %tr{class: "table-primary"}
-      %th Name
-      %th Surname
-      %th Date of Birth
-      %th Category
-      %th Club
-      %th Gender
+      %th= link_to 'Name', sort: 'runner_name'
+      %th= link_to 'Surname', sort: 'surname'
+      %th= link_to 'Date of Birth', sort: 'dob'
+      %th= link_to 'Category', sort: 'categories.id'
+      %th= link_to 'Club', sort: 'clubs.club_name'
+      %th= link_to 'Gender', sort: 'gender'
       %th{ colspan: "3"}Actions
   %tbody
     - runners.each do |runner|

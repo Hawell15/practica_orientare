@@ -1,1 +1,1 @@
-json.partial! "competitions/competition", competition: @competition
+json.partial! 'competitions/competition', competition: @competition

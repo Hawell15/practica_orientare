@@ -39,12 +39,14 @@
     = form.label :time, class: "col-sm-3 col-form-label"
     .col-sm-15
       .row.g-3
+        - hours, minutes, seconds = if @result.id
+          - [@result.time/3600, @result.time % 3600 / 60, @result.time% 3600 % 60]
         .col-sm-2
-          = form.number_field :hours, class: "form-control", placeholder: "Hours"
+          = form.number_field :hours, value: hours, class: "form-control", placeholder: "Hours"
         .col-sm-2
-          = form.number_field :minutes, class: "form-control", placeholder: "Minutes"
+          = form.number_field :minutes, value: minutes, class: "form-control", placeholder: "Minutes"
         .col-sm-2
-          = form.number_field :seconds, class: "form-control", placeholder: "Seconds"
+          = form.number_field :seconds, value: seconds, class: "form-control", placeholder: "Seconds"
   .mb-3.row
     = form.label :category, class: "col-sm-3 col-form-label"
     .col-sm-4

@@ -19,20 +19,14 @@ module HomeHelper
       date:             json.dig('data', 'start_datetime').to_date.as_json,
       location:         json.dig('data', 'location')
     }
-    byebug
     comp_id = add_competition(competition_hash).id
-    byebug
 
     json['groups'].each do |group|
       group_hash = {
         group_name:           group['name'],
         competition_id: comp_id
       }.compact
-    byebug
-
-
       group_id = add_group(group_hash).id
-    byebug
 
       json['persons'].select { |pers| pers['group_id'] == group['id'] }.each do |runner|
         club = json['organizations'].detect { |org| org['id'] == runner['organization_id'] }

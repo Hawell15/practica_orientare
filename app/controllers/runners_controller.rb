@@ -1,14 +1,27 @@
 class RunnersController < ApplicationController
-  before_action :set_runner, only: %i[ show edit update destroy ]
+  before_action :set_runner, only: %i[show edit update destroy]
 
   # GET /runners or /runners.json
   def index
     @runners = Runner.all
+    @runners.each do |runner|
+      category = get_category(runner)
+      runner.update(category: category) if runner.category != category
+    end
+
+    if params[:search]
+      @runners = Runner.where("runner_name LIKE '%#{params[:search]}%'")
+                       .or(Runner.where("surname LIKE '%#{params[:search]}%'"))
+    end
+     @runners = if params[:sort]&.include?('.')
+                 @runners.joins(params[:sort].split('.').first.singularize.to_sym).order(params[:sort])
+               else
+                 @runners.order(params[:sort])
+               end
   end
 
   # GET /runners/1 or /runners/1.json
-  def show
-  end
+  def show; end
 
   # GET /runners/new
   def new
@@ -16,8 +29,7 @@ class RunnersController < ApplicationController
   end
 
   # GET /runners/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /runners or /runners.json
   def create
@@ -32,7 +44,7 @@ class RunnersController < ApplicationController
       add_result(params)
     end
     respond_to do |format|
-      format.html { redirect_to @runner, notice: "Runner was successfully created." }
+      format.html { redirect_to @runner, notice: 'Runner was successfully created.' }
       format.json { render :show, status: :created, location: @runner }
     end
   end
@@ -40,8 +52,8 @@ class RunnersController < ApplicationController
   # PATCH/PUT /runners/1 or /runners/1.json
   def update
     respond_to do |format|
-      if @runner.update(runner_params)
-        format.html { redirect_to @runner, notice: "Runner was successfully updated." }
+      if @runner.update(runner_params.slice(:runner_name, :surname, :dob, :club_id, :gender))
+        format.html { redirect_to @runner, notice: 'Runner was successfully updated.' }
         format.json { render :show, status: :ok, location: @runner }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,23 +66,24 @@ class RunnersController < ApplicationController
   def destroy
     @runner.destroy
     respond_to do |format|
-      format.html { redirect_to runners_url, notice: "Runner was successfully destroyed." }
+      format.html { redirect_to runners_url, notice: 'Runner was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_runner
-      @runner = Runner.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def runner_params
-      params.require(:runner).permit(
-        :runner_name, :surname, :dob, :category_id, :club_id, :gender,
-        :place, :hours, :minutes, :seconds, :category_id, :competition_id,
-        :competition_name, :date, :location, :country, :group_id, :distance_type, :group_name
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_runner
+    @runner = Runner.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def runner_params
+    params.require(:runner).permit(
+      :runner_name, :surname, :dob, :category_id, :club_id, :gender,
+      :place, :hours, :minutes, :seconds, :category_id, :competition_id,
+      :competition_name, :date, :location, :country, :group_id, :distance_type, :group_name
+    )
+  end
 end

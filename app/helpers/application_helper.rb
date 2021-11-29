@@ -29,7 +29,7 @@ module ApplicationHelper
   def add_competition(hash)
     return default_competition if hash[:competition_name].blank?
 
-    hash[:date] = (hash[:date] || "#{hash["date(1i)"]}-#{hash["date(2i)"]}-#{hash["date(3i)"]}").to_date.as_json
+    hash[:date] = (hash[:date] || "#{hash['date(1i)']}-#{hash['date(2i)']}-#{hash['date(3i)']}").to_date.as_json
 
     competition = Competition.find_by(hash.slice(:competition_name, :date, :distance_type))
     return competition if competition
@@ -37,7 +37,7 @@ module ApplicationHelper
     competition_hash = hash.slice(:competition_name, :date, :location, :country, :distance_type).compact
 
     new_competition = Competition.create(competition_hash)
-    add_group({ group_name: "New", competition_id: new_competition })
+    add_group({ group_name: 'New', competition_id: new_competition })
     new_competition
   end
 
@@ -85,7 +85,7 @@ module ApplicationHelper
 
   def group_id(params)
     return default_group if params[:group_id] == default_group.id
-    return params[:group_id] unless Group.find(params[:group_id]).group_name == "New"
+    return params[:group_id] unless Group.find(params[:group_id]).group_name == 'New'
 
     add_group(params).id
   end
@@ -93,7 +93,11 @@ module ApplicationHelper
   def get_category(runner, date = Time.now)
     return default_category if runner.results.blank?
 
-    runner.results.select { |result| ((date - 2.years)..date).cover?(result.group.competition.date) }
-      .map(&:category).uniq.sort_by(&:id).min rescue default_category
+    begin
+      runner.results.select { |result| ((date - 2.years)..date).cover?(result.group.competition.date) }
+            .map(&:category).uniq.sort_by(&:id).min
+    rescue StandardError
+      default_category
+    end
   end
 end
